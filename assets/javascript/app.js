@@ -115,27 +115,24 @@ var questionsArray = [
     }
 ];
 
-//Testing Data Structure
-var x = 1;
-
-console.log(questionsArray[x].questionText);
-console.log(questionsArray[x].answers.option1.optionText);
-console.log(questionsArray[x].answers.option1.correct);
-
-//On-click event to begin the game
-$("#start-button").on("click"); {
-    //runGame();
-    };
-
 //Function that starts the timer and begins iterating through the questions
-$(document).ready(function runGame() {
-    for (var i = 0; i < questionsArray.length; i++) {
+var i = 0
+
+function questionLoop() {
+    setTimeout(function() {
         $("#game-area").html("");
-        $("#game-area").append("<div>").text(questionsArray[i].questionText);
-        $("#game-area").append("<button>").text(questionsArray[i].answers.option1.optionText);
-        $("#game-area").append("<button>").text(questionsArray[i].answers.option2.optionText);
-        $("#game-area").append("<button>").text(questionsArray[i].answers.option3.optionText);
-        $("#game-area").append("<button>").text(questionsArray[i].answers.option4.optionText);
-        //add timer
-    };
-});
+        questionElement = $("<div>").html(questionsArray[i].questionText).attr("width","100%");
+        answersElement = $("<div>").addClass("btn-group-vertical");
+        option1Element = $("<button>").html(questionsArray[i].answers.option1.optionText);
+        option2Element = $("<button>").html(questionsArray[i].answers.option2.optionText);
+        option3Element = $("<button>").html(questionsArray[i].answers.option3.optionText);
+        option4Element = $("<button>").html(questionsArray[i].answers.option4.optionText);
+        $(answersElement).append(option1Element, option2Element, option3Element, option4Element);
+        $("#game-area").append(questionElement, answersElement);
+        i++;
+        if (i < questionsArray.length) {
+            questionLoop();
+        };
+    }, 20000)};
+
+$("#start-button").on("click", questionLoop());
