@@ -6,23 +6,30 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/CSS" href="assets/css/style.css">
-    <title>Hippopatotrivia!</title>
+    <title>Hippo Trivia!</title>
 </head>
 <body>
     <div class="container-fluid">
-        <div class="row d-flex justify-content-center">
-            <div class="col-lg-12 d-flex justify-content-center">
-                <h1 class="text-justify-center">Hippopatotrivia!</h1>
+        <div class="row">
+            <div class="jumbotron col-9 mx-auto">
+                <h1 class="text-center">Hippopotamus Trivia!</h1>
             </div>
         </div>
-        <div class="row d-flex justify-content-center">
-            <div class="col-lg-12 d-flex justify-content-center">
-                <h6 class="text-justify-center">A Test Of Your Hippopotamus Knowledge</h6>
+        <br>
+        <div class="row">
+            <div class="col-9" id="scoreboard">
+                <!-- Timer and count of correct & incorrect responses will display here -->
             </div>
         </div>
-        <div class="row d-flex justify-content-center">
-            <div class="col-lg-12 d-flex justify-content-center" id="game-area">
-                <button class="btn center" id="start-button">Start</button>
+        <div class="row">
+            <div class="card col-9 center mx-auto p-0" id="game-area">
+                <div class="card-header" id="question-element">
+                    <h5 class="text-center">A Test Of Your Hippopotamus Knowledge</h5>
+                </div>
+                <div class="card-body text-center" id="options-element">
+                    <div class="btn btn-success col-4" id="start-button">Start</div>
+                    <!-- Button will disappear when game begins -->
+                </div>
             </div>
         </div>
     </div>

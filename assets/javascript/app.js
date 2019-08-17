@@ -116,7 +116,7 @@ var questionsArray = [
 ];
 
 //Function that starts the timer and begins iterating through the questions
-var i = 0
+var i = 0;
 
 function questionLoop() {
     setTimeout(function() {
@@ -133,6 +133,6 @@ function questionLoop() {
         if (i < questionsArray.length) {
             questionLoop();
         };
-    }, 20000)};
+    }, 5000)};
 
 $("#start-button").on("click", questionLoop());
