@@ -11,20 +11,26 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="jumbotron col-9 mx-auto">
+            <div class="jumbotron col-9 mx-auto mt-2">
                 <h1 class="text-center">Hippopotamus Trivia!</h1>
             </div>
         </div>
-        <br>
-        <div class="row">
-            <div class="col-9" id="scoreboard">
+        <div class="row justify-content-center mb-4" id="scoreboard">
+            <div class="col-2 text-center" id="question-number-element">
+            </div>
+            <div class="col-2 text-center" id="correct-number-element">
+            </div>
+            <div class="col-2 text-center" id="incorrect-number-element">
+            </div>
+            <div class="col-2 text-center" id="time-remaining-element">
+            </div>
                 <!-- Timer and count of correct & incorrect responses will display here -->
             </div>
         </div>
         <div class="row">
-            <div class="card col-9 center mx-auto p-0" id="game-area">
-                <div class="card-header" id="question-element">
-                    <h5 class="text-center">A Test Of Your Hippopotamus Knowledge</h5>
+            <div class="card col-8 center mx-auto p-0" id="game-area">
+                <div class="card-header" >
+                    <h5 class="text-center" id="question-element">Test Your Hippopotamus Knowledge</h5>
                 </div>
                 <div class="card-body text-center" id="options-element">
                     <div class="btn btn-success col-4" id="start-button">Start</div>

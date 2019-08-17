@@ -1,3 +1,4 @@
+
 //Variables to track the user's score
 var correctAnswers = 0;
 var incorrectAnswers = 0;
@@ -120,19 +121,36 @@ var i = 0;
 
 function questionLoop() {
     setTimeout(function() {
-        $("#game-area").html("");
-        questionElement = $("<div>").html(questionsArray[i].questionText).attr("width","100%");
-        answersElement = $("<div>").addClass("btn-group-vertical");
-        option1Element = $("<button>").html(questionsArray[i].answers.option1.optionText);
-        option2Element = $("<button>").html(questionsArray[i].answers.option2.optionText);
-        option3Element = $("<button>").html(questionsArray[i].answers.option3.optionText);
-        option4Element = $("<button>").html(questionsArray[i].answers.option4.optionText);
+        $("#question-number-element").text("Question #" + (i+1));
+        $("#correct-number-element").text("Correct: " + correctAnswers);
+        $("#incorrect-number-element").text("Incorrect: " + incorrectAnswers);
+        $("#time-remaining-element").html("Time: ");
+
+
+        //Empties card header and inserts question text
+        $("#question-element").empty();
+        $("#question-element").text(questionsArray[i].questionText);
+
+        //Empties card body and inserts options
+        $("#options-element").empty();
+        answersElement = $("<div>").addClass("btn-group-vertical col-5");
+        option1Element = $("<div>").addClass("btn btn-light mb-1").text(questionsArray[i].answers.option1.optionText);
+        option2Element = $("<div>").addClass("btn btn-light mb-1").text(questionsArray[i].answers.option2.optionText);
+        option3Element = $("<div>").addClass("btn btn-light mb-1").text(questionsArray[i].answers.option3.optionText);
+        option4Element = $("<div>").addClass("btn btn-light mb-1").text(questionsArray[i].answers.option4.optionText);
+        
+        //Adds options buttons to verticl button group
         $(answersElement).append(option1Element, option2Element, option3Element, option4Element);
-        $("#game-area").append(questionElement, answersElement);
+        
+        //Insets button group to the card body
+        $("#options-element").html(answersElement);
         i++;
         if (i < questionsArray.length) {
             questionLoop();
         };
     }, 5000)};
 
-$("#start-button").on("click", questionLoop());
+
+$(document).ready(function() {
+    $("#start-button").on("click", questionLoop());
+});
