@@ -118,39 +118,66 @@ var questionsArray = [
 
 //Function that starts the timer and begins iterating through the questions
 var i = 0;
-
-function questionLoop() {
-    setTimeout(function() {
-        $("#question-number-element").text("Question #" + (i+1));
-        $("#correct-number-element").text("Correct: " + correctAnswers);
-        $("#incorrect-number-element").text("Incorrect: " + incorrectAnswers);
-        $("#time-remaining-element").html("Time: ");
+var delay = 3000;
 
 
-        //Empties card header and inserts question text
-        $("#question-element").empty();
-        $("#question-element").text(questionsArray[i].questionText);
-
-        //Empties card body and inserts options
-        $("#options-element").empty();
-        answersElement = $("<div>").addClass("btn-group-vertical col-5");
-        option1Element = $("<div>").addClass("btn btn-light mb-1").text(questionsArray[i].answers.option1.optionText);
-        option2Element = $("<div>").addClass("btn btn-light mb-1").text(questionsArray[i].answers.option2.optionText);
-        option3Element = $("<div>").addClass("btn btn-light mb-1").text(questionsArray[i].answers.option3.optionText);
-        option4Element = $("<div>").addClass("btn btn-light mb-1").text(questionsArray[i].answers.option4.optionText);
-        
-        //Adds options buttons to verticl button group
-        $(answersElement).append(option1Element, option2Element, option3Element, option4Element);
-        
-        //Insets button group to the card body
-        $("#options-element").html(answersElement);
-        i++;
-        if (i < questionsArray.length) {
-            questionLoop();
-        };
-    }, 5000)};
-
-
-$(document).ready(function() {
-    $("#start-button").on("click", questionLoop());
+$("#start-button").click(function() {
+    displayQuyestion(i);
+    $(questionsArray).each(function(i) {
+        setTimeout(function() {
+            i++;
+            displayQuyestion(i)
+        }, delay);
+        delay += 3000;
+    });
 });
+
+function displayQuyestion(i) {
+    //Displays scoreboard
+    $("#question-number-element").text("Question #" + (i+1));
+    $("#correct-number-element").text("Correct: " + correctAnswers);
+    $("#incorrect-number-element").text("Incorrect: " + incorrectAnswers);
+    $("#time-remaining-element").html("Time: ");
+
+    //Empties card header and inserts question text
+    $("#question-element").empty();
+    $("#question-element").text(questionsArray[i].questionText);
+
+    //Empties card body and inserts options
+    console.log(questionsArray[i].answers.option1.optionText);
+
+    $("#options-element").empty();
+    answersElement = $("<div>").addClass("btn-group-vertical col-5");
+    option1Element = $("<div>").addClass("btn btn-light mb-1").text(questionsArray[i].answers.option1.optionText);
+    option2Element = $("<div>").addClass("btn btn-light mb-1").text(questionsArray[i].answers.option2.optionText);
+    option3Element = $("<div>").addClass("btn btn-light mb-1").text(questionsArray[i].answers.option3.optionText);
+    option4Element = $("<div>").addClass("btn btn-light mb-1").text(questionsArray[i].answers.option4.optionText);
+
+    //Adds options buttons to verticl button group
+    $(answersElement).append(option1Element, option2Element, option3Element, option4Element);
+
+    //Insets button group to the card body
+    $("#options-element").html(answersElement);
+};
+
+// function questionLoop() {
+//     setTimeout(function() {
+
+//         //Empties card body and inserts options
+//         $("#options-element").empty();
+//         answersElement = $("<div>").addClass("btn-group-vertical col-5");
+//         option1Element = $("<div>").addClass("btn btn-light mb-1").text(questionsArray[i].answers.option1.optionText);
+//         option2Element = $("<div>").addClass("btn btn-light mb-1").text(questionsArray[i].answers.option2.optionText);
+//         option3Element = $("<div>").addClass("btn btn-light mb-1").text(questionsArray[i].answers.option3.optionText);
+//         option4Element = $("<div>").addClass("btn btn-light mb-1").text(questionsArray[i].answers.option4.optionText);
+        
+//         //Adds options buttons to verticl button group
+//         $(answersElement).append(option1Element, option2Element, option3Element, option4Element);
+        
+//         //Insets button group to the card body
+//         $("#options-element").html(answersElement);
+//         i++;
+//         if (i < questionsArray.length) {
+//             questionLoop();
+//         };
+//     }, 5000)};
