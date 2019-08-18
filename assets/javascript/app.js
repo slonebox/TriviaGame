@@ -121,33 +121,38 @@ var questionsArray = [
 var delay = 3000;
 
 //Sets initial timer to the 
-var timeLeft = 3;
+var originalTime = 3;
+var betweenTime = 5;
+var timeLeft = originalTime;
 var intervalID;
 
 function run () {
     clearInterval(intervalID);
-    intervalId = setInterval(decrement, 1000)
+    intervalId = setInterval(decrement, 1000);
+    if (timeLeft === 0) {
+        stop();
+        incorrectAnswers++;
+        $("#incorrect-number-element").text("Incorrect: " + incorrectAnswers);
+    };
 };
 
 function decrement() {
     timeLeft--;
     $("#time-remaining-element").html("Time: " + timeLeft);
-    if (timeLeft === 0) {
-        stop();
-    };
 };
 
 function stop() {
     clearInterval(intervalId);
-    console.log(intervalID);
+    timeLeft = originalTime;
+    $("#time-remaining-element").html("Time: " + timeLeft);
 };
 
 //Click event function that starts the game and begins running the clock
 var i = 0;
 
 $("#start-button").click(function() {
-    run();
     displayQuyestion(i);
+    run();
     $(questionsArray).each(function(i) {
         setTimeout(function() {
             i++;
