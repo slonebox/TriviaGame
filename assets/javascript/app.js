@@ -116,36 +116,62 @@ var questionsArray = [
     }
 ];
 
-//Function that starts the timer and begins iterating through the questions
-var i = 0;
+//Functions and Variables that keep and display the time
+
 var delay = 3000;
 
+//Sets initial timer to the 
+var timeLeft = 3;
+var intervalID;
+
+function run () {
+    clearInterval(intervalID);
+    intervalId = setInterval(decrement, 1000)
+};
+
+function decrement() {
+    timeLeft--;
+    $("#time-remaining-element").html("Time: " + timeLeft);
+    if (timeLeft === 0) {
+        stop();
+    };
+};
+
+function stop() {
+    clearInterval(intervalId);
+    console.log(intervalID);
+};
+
+//Click event function that starts the game and begins running the clock
+var i = 0;
 
 $("#start-button").click(function() {
+    run();
     displayQuyestion(i);
     $(questionsArray).each(function(i) {
         setTimeout(function() {
             i++;
             displayQuyestion(i)
+            run();
         }, delay);
         delay += 3000;
     });
 });
 
+
+//Function to display game values 
 function displayQuyestion(i) {
     //Displays scoreboard
     $("#question-number-element").text("Question #" + (i+1));
     $("#correct-number-element").text("Correct: " + correctAnswers);
     $("#incorrect-number-element").text("Incorrect: " + incorrectAnswers);
-    $("#time-remaining-element").html("Time: ");
+    $("#time-remaining-element").html("Time: " + timeLeft);
 
     //Empties card header and inserts question text
     $("#question-element").empty();
     $("#question-element").text(questionsArray[i].questionText);
 
     //Empties card body and inserts options
-    console.log(questionsArray[i].answers.option1.optionText);
-
     $("#options-element").empty();
     answersElement = $("<div>").addClass("btn-group-vertical col-5");
     option1Element = $("<div>").addClass("btn btn-light mb-1").text(questionsArray[i].answers.option1.optionText);
@@ -158,26 +184,4 @@ function displayQuyestion(i) {
 
     //Insets button group to the card body
     $("#options-element").html(answersElement);
-};
-
-// function questionLoop() {
-//     setTimeout(function() {
-
-//         //Empties card body and inserts options
-//         $("#options-element").empty();
-//         answersElement = $("<div>").addClass("btn-group-vertical col-5");
-//         option1Element = $("<div>").addClass("btn btn-light mb-1").text(questionsArray[i].answers.option1.optionText);
-//         option2Element = $("<div>").addClass("btn btn-light mb-1").text(questionsArray[i].answers.option2.optionText);
-//         option3Element = $("<div>").addClass("btn btn-light mb-1").text(questionsArray[i].answers.option3.optionText);
-//         option4Element = $("<div>").addClass("btn btn-light mb-1").text(questionsArray[i].answers.option4.optionText);
-        
-//         //Adds options buttons to verticl button group
-//         $(answersElement).append(option1Element, option2Element, option3Element, option4Element);
-        
-//         //Insets button group to the card body
-//         $("#options-element").html(answersElement);
-//         i++;
-//         if (i < questionsArray.length) {
-//             questionLoop();
-//         };
-//     }, 5000)};
+}
