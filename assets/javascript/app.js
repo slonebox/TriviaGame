@@ -113,7 +113,8 @@ var questionsArray = [
 //Variables to track the user's score
 var correctAnswers = 0;
 var incorrectAnswers = 0;
-var score = correctAnswers/questionsArray.length + "%";
+//need to fix the score element
+var score = (Math.correctAnswers/questionsArray.length) + "%";
 
 //Functions and Variables that keep and display the time
 
@@ -161,13 +162,23 @@ $("#start-button").click(function() {
             console.log(i)
         }, delay);
         delay += 3000;
-        if (i === questionsArray.Length) {
-            console.log("Cool");
-        }
     });
     
 });
 
+//Functions to listen to on-click events during the game
+function checkAnswer() {
+    $(".option-button").click(function() {
+        value = $(this).attr("correct");
+        if (value === "true") {
+            correctAnswers++
+            $("#correct-number-element").text("Correct: " + correctAnswers);
+        } else {
+            incorrectAnswers++
+            $("#correct-number-element").text("Correct: " + incorrectAnswers);
+        }
+    });
+}
 
 //Function to display game values 
 function displayQuyestion(i) {
@@ -185,21 +196,28 @@ function displayQuyestion(i) {
         //Empties card body and inserts options
         $("#options-element").empty();
         answersElement = $("<div>").addClass("btn-group-vertical col-5");
-        option1Element = $("<div>").addClass("btn btn-light mb-1").text(questionsArray[i].answers.option1.optionText);
-        option2Element = $("<div>").addClass("btn btn-light mb-1").text(questionsArray[i].answers.option2.optionText);
-        option3Element = $("<div>").addClass("btn btn-light mb-1").text(questionsArray[i].answers.option3.optionText);
-        option4Element = $("<div>").addClass("btn btn-light mb-1").text(questionsArray[i].answers.option4.optionText);
+        option1Element = $("<div>").addClass("btn btn-light mb-1 option-button").text(questionsArray[i].answers.option1.optionText).attr("correct", questionsArray[i].answers.option1.correct);
+        option2Element = $("<div>").addClass("btn btn-light mb-1 option-button").text(questionsArray[i].answers.option2.optionText).attr("correct", questionsArray[i].answers.option2.correct);
+        option3Element = $("<div>").addClass("btn btn-light mb-1 option-button").text(questionsArray[i].answers.option3.optionText).attr("correct", questionsArray[i].answers.option3.correct);
+        option4Element = $("<div>").addClass("btn btn-light mb-1 option-button").text(questionsArray[i].answers.option4.optionText).attr("correct", questionsArray[i].answers.option4.correct);
 
         //Adds options buttons to verticl button group
         $(answersElement).append(option1Element, option2Element, option3Element, option4Element);
 
         //Insets button group to the card body
         $("#options-element").html(answersElement);
-        }
+
+        checkAnswer();
+    }
+
+        
+
         else {
             endGame();
         }
 }
+
+
 
 
 //Runs display upon conclusion of game
